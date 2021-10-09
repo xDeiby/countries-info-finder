@@ -1,0 +1,28 @@
+<h2>Por Capital</h2>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <app-search
+      (onNewSearch)="search($event)"
+      (onDebounce)="suggest($event)"
+      placeholder="capital"
+    ></app-search>
+  </div>
+</div>
+<hr />
+
+<app-error-message *ngIf="error" [term]="searchValue"></app-error-message>
+
+<div class="row">
+  <div class="col">
+    <app-table
+      *ngIf="countries.length; else noData"
+      class="table table-hover"
+      [data]="countries"
+    ></app-table>
+    <ng-template #noData>
+      <h1>No hay datos</h1>
+    </ng-template>
+  </div>
+</div>

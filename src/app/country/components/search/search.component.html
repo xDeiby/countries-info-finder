@@ -1,0 +1,9 @@
+<input
+  type="text"
+  name="term"
+  placeholder="Buscar {{ placeholder }}..."
+  class="form-control"
+  (keyup.enter)="searchValue()"
+  (input)="inputModifies($event)"
+  #valueSearch
+/>

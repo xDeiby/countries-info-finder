@@ -1,0 +1,42 @@
+<h2>Por País</h2>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <app-search
+      (onNewSearch)="search($event)"
+      (onDebounce)="newSuggests($event)"
+    ></app-search>
+  </div>
+</div>
+
+<ul *ngIf="showSuggests && searchValue" class="list-group">
+  <li
+    *ngFor="let suggest of suggests"
+    class="list-group-item list-group-item-action"
+  >
+    <a class="nav-link" [routerLink]="['country', suggest.alpha2Code]">{{
+      suggest.name
+    }}</a>
+  </li>
+
+  <li *ngIf="searchValue" class="list-group-item list-group-item-action">
+    <a class="nav-link" (click)="searchSuggest()">Buscar "{{ searchValue }}"</a>
+  </li>
+</ul>
+<hr />
+
+<app-error-message *ngIf="error" [term]="searchValue"></app-error-message>
+
+<div class="row">
+  <div class="col">
+    <app-table
+      *ngIf="countries.length; else noData"
+      class="table table-hover"
+      [data]="countries"
+    ></app-table>
+    <ng-template #noData>
+      <h1>No hay datos</h1>
+    </ng-template>
+  </div>
+</div>
